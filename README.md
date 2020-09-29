@@ -17,7 +17,7 @@ iOS App: Flix is an app that allows users to browse movies from the [The Movie D
 ### App Walkthrough GIF
 `TODO://` Add the URL to your animated app walkthough `gif` in the image tag below, `YOUR_GIF_URL_HERE`. Make sure the gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after after adding gif)
 
-<img src="YOUR_GIF_URL_HERE" width=250><br>
+<img src="https://github.com/Power186/Flixster/blob/master/Flix2.gif" width=250><br>
 
 ### Notes
 Setting the collecitonView's "estimate size" to none as the collectionView cell returned the incorrect height and width specified in the cell with the imageView.
