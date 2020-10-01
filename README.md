@@ -16,7 +16,7 @@ iOS App: Flix is an app that allows users to browse movies from the [The Movie D
 
 ### App Walkthrough GIF
 
-<img src="https://github.com/Power186/Flixster/blob/master/Flix2.gif" width=250><br>
+<img src="https://github.com/Power186/Flixster/blob/master/movie.gif" width=250><br>
 
 ### Notes
 Setting the collecitonView's "estimate size" to none as the collectionView cell returned the incorrect height and width specified in the cell with the imageView.
