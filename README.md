@@ -38,7 +38,7 @@ Setting the collecitonView's "estimate size" to none as the collectionView cell 
 
 ### App Walkthrough GIF
 
-<img src="YOUR_GIF_URL_HERE" width=250><br>
+<img src="https://github.com/Power186/Flixster/blob/master/first.gif" width=250><br>
 
 ### Notes
 Fetching data from the API using Codable protocol. Resolved by appropriately mocking the data in the codable struct inline with the JSON response.
