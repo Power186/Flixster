@@ -10,6 +10,8 @@ import AlamofireImage
 
 class MovieDetailsViewController: UIViewController {
     
+    // MARK: - Properties
+    
     @IBOutlet weak var backdropView: UIImageView!
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -17,12 +19,24 @@ class MovieDetailsViewController: UIViewController {
     
     var movie: Movie!
 
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        //print(movie.title!)
+        updateView()
+    }
+    
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        let trailerViewController = segue.destination as! TrailerViewController
+        trailerViewController.movie = movie
+    }
+    
+    // MARK: - Private Functions
+    private func updateView() {
         titleLabel.text = movie.title
         titleLabel.sizeToFit()
         synopsisLabel.text = movie.overview
@@ -37,16 +51,5 @@ class MovieDetailsViewController: UIViewController {
         let backdropUrl = URL(string: baseUrl + backdropPath)
         backdropView.af.setImage(withURL: backdropUrl!)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

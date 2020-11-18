@@ -10,47 +10,24 @@ import AlamofireImage
 
 class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    // MARK: - Properties
+    
     var movies = [Movie]()
     
     @IBOutlet weak var moviesTableView: UITableView!
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         moviesTableView.dataSource = self
         moviesTableView.delegate = self
-        
-        // Do any additional setup after loading the view.
-        
-        let DomainURL = "https://api.themoviedb.org/3/movie/now_playing?api_key=e440db23eb1672865e458926c722caff"
 
-        func fetch() {
-            let urlString = DomainURL
-            
-            if let url = URL.init(string: urlString) {
-                let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                    print(String.init(data: data!, encoding: .ascii) ?? "no data")
-                    if let result = try? JSONDecoder().decode(Movies.self, from: data!) {
-                        print(result.results)
-                        
-                        // Update movies array
-                        let newMovies = result.results
-                        self.movies.append(contentsOf: newMovies)
-                        
-                        // Reload data
-                        DispatchQueue.main.async {
-                            self.moviesTableView.reloadData()
-                        }
-                        
-                    }
-                })
-                task.resume()
-            }
-        }
-
-        fetch()
+        fetchMovies()
     }
     
-    // Table
+    // MARK: - TableView Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
@@ -89,6 +66,34 @@ class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         moviesTableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    // MARK: - Private API
+
+    private func fetchMovies() {
+        
+        let DomainURL = "https://api.themoviedb.org/3/movie/now_playing?api_key=e440db23eb1672865e458926c722caff"
+        let urlString = DomainURL
+        
+        if let url = URL.init(string: urlString) {
+            let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                print(String.init(data: data!, encoding: .ascii) ?? "no data")
+                if let result = try? JSONDecoder().decode(Movies.self, from: data!) {
+                    //print(result.results)
+                    
+                    // Update movies array
+                    let newMovies = result.results
+                    self.movies.append(contentsOf: newMovies)
+                    
+                    // Reload data
+                    DispatchQueue.main.async {
+                        self.moviesTableView.reloadData()
+                    }
+                    
+                }
+            })
+            task.resume()
+        }
+    }
    
 }
 
@@ -102,4 +107,5 @@ struct Movie: Codable {
     let overview: String?
     let poster_path: String?
     let backdrop_path: String?
+    let id: Int?
 }
